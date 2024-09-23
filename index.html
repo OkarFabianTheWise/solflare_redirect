@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solflare Response Handler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #e6f0ff; /* Light blue */
+    }
+    h1 {
+      color: #003366; /* Dark blue */
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Handling Solflare Response</h1>
+    <p>Please wait, we are processing your request...</p>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const solflareEncryptionPublicKey = urlParams.get('solflare_encryption_public_key');
+      const nonce = urlParams.get('nonce');
+      const encryptedData = urlParams.get('data');
+
+      if (solflareEncryptionPublicKey && nonce && encryptedData) {
+        const userId = 123456789; // Replace with actual user_id if available
+
+        // Redirect to bot with extracted data
+        window.location.href = `https://t.me/YourBotUsername?start=solflare_${userId}_${nonce}_${encryptedData}`;
+      } else {
+        console.error('Required parameters missing from Solflare response.');
+      }
+    };
+  </script>
+</body>
+</html>
